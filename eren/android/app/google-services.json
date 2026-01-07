@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1011471065468",
+    "project_id": "eren-15846",
+    "storage_bucket": "eren-15846.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1011471065468:android:9b252b977192a5f1a144f9",
+        "android_client_info": {
+          "package_name": "com.example.eren"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC08iEpBnm3cDpD6SE1A9XYspmaB77YfAU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
