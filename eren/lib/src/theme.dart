@@ -15,6 +15,7 @@ class AppTheme {
         seedColor: primaryColor,
         primary: primaryColor,
         secondary: accentColor,
+        // ignore: deprecated_member_use
         background: backgroundColor,
         brightness: Brightness.light,
       ),
