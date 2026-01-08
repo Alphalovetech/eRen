@@ -1,7 +1,10 @@
+import 'package:eren/favorite_screen.dart';
 import 'package:eren/firebase_options.dart';
+import 'package:eren/screen/history_screen.dart';
 import 'package:eren/screen/home_screen.dart';
 import 'package:eren/screen/login_screen.dart';
 import 'package:eren/screen/nav_items.dart';
+import 'package:eren/screen/profile_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -61,10 +64,10 @@ class _AppShellState extends State<AppShell> {
 
   final List<Widget> _pages = const [
     HomeScreen(),
-    LoginScreen(),
+    FavoriteScreen(),
     Center(child: Text('Map')),
-    Center(child: Text('History')),
-    Center(child: Text('Profile')),
+    HistoryScreen(),
+    ProfileScreen(),
   ];
 
   void _onNavTap(int index) => setState(() => _selectedIndex = index);

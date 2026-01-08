@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:eren/util/house_card.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -138,25 +137,112 @@ class _HomeScreenState extends State<HomeScreen> {
               const SizedBox(height: 8),
               // Horizontal cards
               SizedBox(
-                height: 230,
+                height: 280, // increased to avoid bottom overflow
                 child: ListView.separated(
                   scrollDirection: Axis.horizontal,
                   itemCount: 4,
                   separatorBuilder: (_, __) => const SizedBox(width: 12),
                   itemBuilder: (context, index) {
-                    // amounts go down left -> right
-                    final prices = [5000, 4500, 4000, 3500];
-                    final ratings = [4.9, 4.7, 4.6, 4.5];
-                    final ratingCounts = [210, 180, 140, 95];
-                    final distances = ['1.2 km', '1.8 km', '2.4 km', '3.0 km'];
-                    return HouseCard(
-                      title: index == 0 ? 'Sunnyslade House' : 'Oceanview Villa',
-                      location: 'Beverly Hills, CA',
-                      price: '\$${prices[index]}',
-                      imageAsset: 'assets/images/image1.jpeg',
-                      distance: distances[index],
-                      rating: ratings[index],
-                      ratingCount: ratingCounts[index],
+                    final prices = ['\$3500', '\$5000', '\$4200', '\$3800'];
+                    final ratings = ['4.9', '4.8', '4.7', '4.6'];
+                    final locations = ['Beverly Hills, CA', 'Malibu, CA', 'Beverly Hills, CA', 'Malibu, CA'];
+                    final titles = ['Sunnyslade House', 'Oceanview Villa', 'Greenwood Manor', 'Lakeview Residence'];
+                    return Container(
+                      width: 260,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(14),
+                        boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.04), blurRadius: 6)],
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // image with badge
+                          Stack(
+                            children: [
+                              ClipRRect(
+                                borderRadius: const BorderRadius.vertical(top: Radius.circular(14)),
+                                child: Image.asset(
+                                  'assets/images/image1.jpeg',
+                                  width: double.infinity,
+                                  height: 180, // increased to match new card height
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              Positioned(
+                                top: 10,
+                                left: 10,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 4)],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.campaign, size: 12, color: primary),
+                                      const SizedBox(width: 6),
+                                      const Text('For Sale', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              Positioned(
+                                top: 8,
+                                right: 8,
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    color: Colors.white.withOpacity(0.9),
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: IconButton(
+                                    icon: Icon(Icons.star_border, size: 20, color: Colors.grey.shade700),
+                                    onPressed: () {},
+                                    splashRadius: 18,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          // content
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(titles[index], style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w700)),
+                                const SizedBox(height: 8),
+                                Row(
+                                  children: [
+                                    Icon(Icons.location_on, size: 14, color: Colors.grey),
+                                    const SizedBox(width: 6),
+                                    Expanded(child: Text(locations[index], style: const TextStyle(fontSize: 12, color: Colors.grey))),
+                                    const SizedBox(width: 6),
+                                    const Icon(Icons.my_location, size: 14, color: Colors.grey),
+                                    const SizedBox(width: 4),
+                                    const Text('500 miles', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                                  ],
+                                ),
+                                const SizedBox(height: 10),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(prices[index], style: TextStyle(fontSize: 16, fontWeight: FontWeight.w800, color: primary)),
+                                    Row(
+                                      children: [
+                                        const Icon(Icons.star, color: Colors.amber, size: 16),
+                                        const SizedBox(width: 6),
+                                        Text(ratings[index], style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700)),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -174,10 +260,11 @@ class _HomeScreenState extends State<HomeScreen> {
               // Nearest list
               Column(
                 children: List.generate(3, (index) {
-                  final distance = index == 0 ? '1.2 km' : '${(1.2 + index * 0.8).toStringAsFixed(1)} km';
-                  final title = index == 0 ? 'Modern Apartment' : 'Cozy Studio';
-                  final price = '\$${1200 + index * 400}';
-                  final ratingValue = '4.${6 - index}'; // sample ratings
+                  final distance = index == 0 ? '150 miles' : (index == 1 ? '150 miles' : '280 miles');
+                  final titles = ['Modern Apartment', 'Cozy Cottage House', 'Urban Loft Villa'];
+                  final prices = ['\$500/month', '\$800/month', '\$4500'];
+                  final ratings = ['4.9', '4.8', '4.7'];
+                  final tags = ['For Rent', 'For a Rent', 'For Sale'];
                   return Container(
                     margin: const EdgeInsets.only(bottom: 12),
                     decoration: BoxDecoration(
@@ -189,54 +276,80 @@ class _HomeScreenState extends State<HomeScreen> {
                       padding: const EdgeInsets.all(12),
                       child: Row(
                         children: [
-                          // bordered image on the left
-                          Container(
-                            width: 70,
-                            height: 70,
-                            decoration: BoxDecoration(
-                              color: Colors.grey.shade300,
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(color: Colors.grey.shade200),
-                              image: const DecorationImage(
-                                image: AssetImage('assets/images/image3.jpg'),
-                                fit: BoxFit.cover,
+                          // image with overlapping tag
+                          Stack(
+                            children: [
+                              Container(
+                                width: 96,
+                                height: 96,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey.shade300,
+                                  borderRadius: BorderRadius.circular(12),
+                                  border: Border.all(color: Colors.grey.shade200),
+                                  image: const DecorationImage(
+                                    image: AssetImage('assets/images/image3.jpg'),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
                               ),
-                            ),
+                              Positioned(
+                                top: 8,
+                                left: 8,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                                  decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(12),
+                                    boxShadow: [BoxShadow(color: Colors.black.withOpacity(0.03), blurRadius: 4)],
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Icon(Icons.campaign, size: 12, color: primary),
+                                      const SizedBox(width: 6),
+                                      Text(tags[index], style: const TextStyle(fontSize: 11, fontWeight: FontWeight.w600)),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           const SizedBox(width: 12),
-                          // right side: name/star, location+distance, price+rating
+                          // right side: title(+fav), location, price+rating
                           Expanded(
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                // name and star
                                 Row(
                                   children: [
-                                    Expanded(child: Text(title, style: const TextStyle(fontWeight: FontWeight.w600))),
-                                    const SizedBox(width: 8),
-                                    const Icon(Icons.star, color: Colors.amber, size: 16),
+                                    Expanded(
+                                      child: Text(titles[index], style: const TextStyle(fontWeight: FontWeight.w700, fontSize: 15)),
+                                    ),
+                                    IconButton(
+                                      padding: EdgeInsets.zero,
+                                      constraints: const BoxConstraints(),
+                                      icon: Icon(Icons.star_border, color: Colors.grey.shade600),
+                                      onPressed: () {},
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 6),
-                                // location + distance
                                 Row(
                                   children: [
                                     const Icon(Icons.location_on, size: 14, color: Colors.grey),
                                     const SizedBox(width: 6),
-                                    Text('Pasadena, CA · $distance', style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                                    Expanded(child: Text('San Gabriel, CA · $distance', style: const TextStyle(fontSize: 12, color: Colors.grey))),
                                   ],
                                 ),
-                                const SizedBox(height: 8),
-                                // price (left) and rating with value (right)
+                                const SizedBox(height: 10),
                                 Row(
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Text(price, style: TextStyle(fontWeight: FontWeight.w700, color: primary)),
+                                    Text(prices[index], style: TextStyle(fontWeight: FontWeight.w800, color: primary)),
                                     Row(
                                       children: [
                                         const Icon(Icons.star, color: Colors.amber, size: 16),
                                         const SizedBox(width: 6),
-                                        Text(ratingValue, style: const TextStyle(fontSize: 12)),
+                                        Text(ratings[index], style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
                                       ],
                                     ),
                                   ],
