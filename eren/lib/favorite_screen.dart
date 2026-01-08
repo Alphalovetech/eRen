@@ -35,8 +35,9 @@ class FavoriteScreen extends StatelessWidget {
       required List<String> images,
       required double width}) {
     final primary = Theme.of(context).colorScheme.primary;
-    // collage takes ~55% of card width but capped
-    final collageSize = math.min(120.0, width * 0.55);
+    // use available content width (account for padding) so collage can span full card width
+    final contentWidth = (width - 24).clamp(0.0, double.infinity); // padding 12 left/right
+    final collageSize = math.min(200.0, contentWidth);
     return Container(
       width: width,
       margin: const EdgeInsets.only(bottom: 12),
@@ -47,26 +48,31 @@ class FavoriteScreen extends StatelessWidget {
       ),
       child: Padding(
         padding: const EdgeInsets.all(12),
-        child: Row(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _collage(context, images, collageSize),
-            const SizedBox(width: 12),
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end, // move text to bottom
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(title,
-                      style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
-                  const SizedBox(height: 6),
-                  Text(subtitle, style: const TextStyle(fontSize: 13, color: Colors.grey)),
-                ],
-              ),
-            ),
-            const SizedBox(width: 8),
-            IconButton(
-              icon: Icon(Icons.more_vert, color: Colors.grey.shade600),
-              onPressed: () {},
+            const SizedBox(height: 12),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(title,
+                          style: TextStyle(fontSize: 16, fontWeight: FontWeight.w700, color: primary)),
+                      const SizedBox(height: 6),
+                      Text(subtitle, style: const TextStyle(fontSize: 13, color: Colors.grey)),
+                    ],
+                  ),
+                ),
+                IconButton(
+                  icon: Icon(Icons.more_vert, color: Colors.grey.shade600),
+                  onPressed: () {},
+                ),
+              ],
             ),
           ],
         ),
@@ -84,19 +90,19 @@ class FavoriteScreen extends StatelessWidget {
         'subtitle': 'Today',
         'images': [
           'assets/images/image1.jpeg',
-          'assets/images/image2.jpg',
           'assets/images/image3.jpg',
-          'assets/images/image4.jpg'
+          'assets/images/image3.jpg',
+          'assets/images/image1.jpeg'
         ],
       },
       {
         'title': 'Apartment',
         'subtitle': '1 week ago',
         'images': [
-          'assets/images/image5.jpg',
-          'assets/images/image6.jpg',
-          'assets/images/image7.jpg',
-          'assets/images/image8.jpg'
+          'assets/images/image1.jpeg',
+          'assets/images/image3.jpg',
+          'assets/images/image3.jpg',
+          'assets/images/image1.jpeg'
         ],
       },
       // add more groups as needed

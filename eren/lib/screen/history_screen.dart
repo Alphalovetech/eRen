@@ -110,7 +110,7 @@ class HistoryScreen extends StatelessWidget {
         'rating': '4.5',
       },
       {
-        'image': 'assets/images/image2.jpg',
+        'image': 'assets/images/image3.jpg',
         'title': 'Pink Mediterranean Villa',
         'location': 'Malibu, CA',
         'distance': '210 miles',

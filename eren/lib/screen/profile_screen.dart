@@ -46,7 +46,7 @@ class ProfileScreen extends StatelessWidget {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       image: const DecorationImage(
-                        image: AssetImage('assets/images/cover.jpg'), // replace with your cover asset
+                        image: AssetImage('assets/images/image3.jpg'), // replace with your cover asset
                         fit: BoxFit.cover,
                       ),
                       color: Colors.grey.shade300,
@@ -60,7 +60,7 @@ class ProfileScreen extends StatelessWidget {
                       backgroundColor: Colors.white,
                       child: CircleAvatar(
                         radius: 34,
-                        backgroundImage: const AssetImage('assets/images/avatar.jpg'), // replace with avatar asset
+                        backgroundImage: const AssetImage('assets/images/image1.jpeg'), // replace with avatar asset
                       ),
                     ),
                   ),
